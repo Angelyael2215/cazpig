@@ -197,30 +197,32 @@ class UserController extends ChangeNotifier {
 
   /// CORREGIDO POR INTEGRIDAD (A08): Compra de vidas gestionada de manera atómica doble (Vidas y Monedas)
   bool comprarVidasConPigmentos() {
-    if (currentUser.pigments >= 150) {
-      int vidasFaltantes = 5 - currentUser.lives;
-      
-      _currentUser = currentUser.copyWith(
-        lives: 5,
-        pigments: currentUser.pigments - 150,
-      );
-      
-      guardarProgresoLocal();
+  const int maxVidas = 100; //  Define aquí la cantidad máxima de vidas
 
-      // BLINDAJE A08: Modificación síncrona en base de datos sin peligro de inyección por proxy de red
-      final uid = _docId;
-      if (uid != null) {
-        _dbService.addPigments(uid, -150);
-        if (vidasFaltantes > 0) {
-          _dbService.modifyUserLivesAtomic(uid, vidasFaltantes);
-        }
+  if (currentUser.pigments >= 150) {
+    int vidasFaltantes = maxVidas - currentUser.lives; //  1. Cálculo de vidas faltantes
+    
+    _currentUser = currentUser.copyWith(
+      lives: maxVidas, //  2. Asignación del nuevo total
+      pigments: currentUser.pigments - 150,
+    );
+    
+    guardarProgresoLocal();
+
+    // BLINDAJE A08: Modificación síncrona en base de datos sin peligro de inyección por proxy de red
+    final uid = _docId;
+    if (uid != null) {
+      _dbService.addPigments(uid, -150);
+      if (vidasFaltantes > 0) {
+        _dbService.modifyUserLivesAtomic(uid, vidasFaltantes);
       }
-      
-      notifyListeners();
-      return true;
     }
-    return false;
+    
+    notifyListeners();
+    return true;
   }
+  return false;
+}
 
   /// Calcula la regeneración pasiva de vidas por tiempo transcurrido (5 min por vida)
   Future<void> _regenerarVidasPorTiempo() async {

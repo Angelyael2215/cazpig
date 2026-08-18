@@ -5,7 +5,7 @@ class ProgressHeader extends StatelessWidget implements PreferredSizeWidget {
   const ProgressHeader({super.key});
 
   @override
-  Size get preferredSize => const Size.fromHeight(52.0);
+  Size get preferredSize => const Size.fromHeight(68.0);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,13 @@ class ProgressHeader extends StatelessWidget implements PreferredSizeWidget {
 
         return Container(
           width: double.infinity,
-          height: 52,
+          height: 68,
           color: Colors.transparent,
           padding: const EdgeInsets.symmetric(horizontal: 4),
           alignment: Alignment.center,
           child: SizedBox(
             width: double.infinity,
-            height: 52,
+            height: 68,
             child: Stack(
               children: [
                 // 1. IMAGEN DE FONDO
@@ -41,26 +41,26 @@ class ProgressHeader extends StatelessWidget implements PreferredSizeWidget {
                     padding: const EdgeInsets.only(top: 2),
                     child: Row(
                       children: [
-                        // Espacio inicial exacto para saltarse el título "RUTA DEL PIGMENTO"
-                        const Spacer(flex: 38),
+                        // Espacio inicial exacto para saltarse el título "RUTA"
+                        const Spacer(flex: 36),
 
                         // ==================== SECCIÓN VIDAS ====================
                         Expanded(
-                          flex: 16,
+                          flex: 18,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Image.asset(
                                 'assets/imagenes/corazon.png',
-                                height: 21,
+                                height: 30,
                                 fit: BoxFit.contain,
                               ),
-                              const SizedBox(width: 1), // Pegadito al recuadro gris
+                              const SizedBox(width: 4), // Pegadito al recuadro gris
                               Expanded(
                                 child: GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
-                                    if (user.lives < 5) {
+                                    if (user.lives < 100) {
                                       _mostrarCompraVidas(context, userController);
                                     }
                                   },
@@ -69,8 +69,16 @@ class ProgressHeader extends StatelessWidget implements PreferredSizeWidget {
                                       '${user.lives}',
                                       style: const TextStyle(
                                         color: Color(0xFFFFF3E0),
-                                        fontSize: 14,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w900,
+                                        shadows:[
+                                          Shadow(
+                                           color: Colors.black54,
+                                           blurRadius:4,
+                                           offset:Offset(0,1),
+                                          ),
+                                        ],
+
                                       ),
                                     ),
                                   ),
@@ -84,23 +92,23 @@ class ProgressHeader extends StatelessWidget implements PreferredSizeWidget {
 
                         // ==================== SECCIÓN RACHA ====================
                         Expanded(
-                          flex: 16,
+                          flex: 18,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Image.asset(
                                 'assets/imagenes/horno.png',
-                                height: 21,
+                                height: 30,
                                 fit: BoxFit.contain,
                               ),
-                              const SizedBox(width: 1), // Pegadito al recuadro gris
+                              const SizedBox(width: 4), // Pegadito al recuadro gris
                               Expanded(
                                 child: Center(
                                   child: Text(
                                     '${user.streak}',
                                     style: const TextStyle(
                                       color: Color(0xFFFFF3E0),
-                                      fontSize: 14,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w900,
                                     ),
                                   ),
@@ -114,23 +122,23 @@ class ProgressHeader extends StatelessWidget implements PreferredSizeWidget {
 
                         // ==================== SECCIÓN PIGMENTOS ====================
                         Expanded(
-                          flex: 19, // Un pelincito más ancho para soportar cifras de 4 dígitos como "1791"
+                          flex: 22, // Un pelincito más ancho para soportar cifras de 4 dígitos como "1791"
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Image.asset(
                                 'assets/imagenes/cristal.png',
-                                height: 21,
+                                height: 30,
                                 fit: BoxFit.contain,
                               ),
-                              const SizedBox(width: 1), // Pegadito al recuadro gris
+                              const SizedBox(width: 4), // Pegadito al recuadro gris
                               Expanded(
                                 child: Center(
                                   child: Text(
                                     '${user.pigments}',
                                     style: const TextStyle(
                                       color: Color(0xFFFFF3E0),
-                                      fontSize: 13,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w900,
                                     ),
                                   ),
@@ -171,7 +179,7 @@ class ProgressHeader extends StatelessWidget implements PreferredSizeWidget {
             Icon(Icons.favorite_rounded, color: Color(0xFFFF4B4B), size: 70),
             SizedBox(height: 16),
             Text(
-              "¿Quieres reponer tus 5 vidas de inmediato?",
+              "¿Quieres reponer tus 100 vidas de inmediato?",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white70),
             ),

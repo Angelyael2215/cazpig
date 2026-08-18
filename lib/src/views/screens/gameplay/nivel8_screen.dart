@@ -47,7 +47,7 @@ class Nivel8Screen extends StatelessWidget {
                           
                           return Padding(
                             padding: const EdgeInsets.only(right: 16),
-                            child: LongPressDraggable<Color>(
+                            child:  Draggable<Color>(
                               data: color,
                               feedback: _buildDraggableCard(color, hex, true),
                               childWhenDragging: Opacity(

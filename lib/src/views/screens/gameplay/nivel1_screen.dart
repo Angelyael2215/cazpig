@@ -12,7 +12,7 @@ class Nivel1Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseGameplayScreen<MixLevelModel, Nivel1Controller>(
       nivel: nivelInicial,
-      ocultarBotonComprobar: true, 
+      ocultarBotonComprobar: false, 
       controllerFactory: (context) => Nivel1Controller(nivelInicial: nivelInicial),
       gameFieldBuilder: (context, controller) {
         return Column(
@@ -98,16 +98,7 @@ class Nivel1Screen extends StatelessWidget {
                 bool seleccionado = controller.colorSeleccionado1 == col || controller.colorSeleccionado2 == col;
 
                 return GestureDetector(
-                  onTap: () async {
-                    controller.seleccionarColor(col);
-
-                    if (controller.listoParaComprobar) {
-                      await Future.delayed(const Duration(milliseconds: 180));
-                      if (context.mounted) {
-                        controller.comprobarResultadoAutomatico(context);
-                      }
-                    }
-                  },
+                onTap: () => controller.seleccionarColor(col),
                   child: Container(
                     width: 140,
                     height: 100,
