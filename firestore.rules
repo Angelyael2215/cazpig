@@ -12,7 +12,8 @@ service cloud.firestore {
     }
 
     match /users/{userId} {
-      allow read: if isOwner(userId);
+      // Permitimos lectura a usuarios autenticados para visualizar el Ranking Top 20
+      allow read: if isAuthenticated();
       
       // Permitimos la creación inicial del perfil
       allow create: if isOwner(userId);
@@ -22,10 +23,13 @@ service cloud.firestore {
         // 1. Regula las vidas: El cliente no puede asignarse más del máximo permitido (5)
         && (request.resource.data.lives <= 5)
         
-        // 2. Candado de economía: Si los pigmentos disminuyen (compró vidas), verifica que no hayan bajado a menos de 0
+        // 2. Candado de economía: Si los pigmentos disminuyen, verifica que no bajen de 0
         && (request.resource.data.pigments >= 0)
+
+        // 3. Control Anti-trampas: Previene la inyección arbitraria excesiva de pigmentos por transacción (+30 máximo)
+        && (request.resource.data.pigments <= resource.data.pigments + 30)
         
-        // 3. Integridad de datos: Protege que el email del documento no sea alterado maliciosamente
+        // 4. Integridad de datos: Protege que el email del documento no sea alterado maliciosamente
         && (request.resource.data.email == resource.data.email);
 
       match /gameResults/{resultId} {

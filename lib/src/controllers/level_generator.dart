@@ -99,25 +99,22 @@ class LevelGenerator {
   ];
 
   static final List<String> _plantillasBrief = [
-    "El cliente exige proyectar {emocion}. ¿Qué matiz es el ideal?",
-    "Se busca transmitir {emocion}. Selecciona el pigmento indicado para esta identidad visual:",
-    "Diseño contemporáneo basado en {emocion}. ¿Cuál es su color base?",
-    "Se requiere comunicar {emocion} sin distracciones de forma instantánea. Elige el tono idóneo:",
-    "El brief de la marca pide denotar {emocion} para conectar con su audiencia. Elige:"
+    "El cliente quiere transmitir {emocion}. ¿Cuál es el color ideal?",
+    "¿Qué color representa mejor la idea de {emocion}?",
+    "Selecciona el color perfecto para comunicar {emocion}:",
+    "Para un diseño que proyecte {emocion}, ¿qué tono elegirías?",
   ];
 
   static final List<String> _plantillasContrasteClaro = [
-    "Un usuario con fatiga visual leerá este banner. Selecciona el color de texto más legible:",
-    "Diseñas una tarjeta sobre este fondo claro. Elige el matiz que cumpla con el estándar de accesibilidad WCAG:",
-    "Para la tipografía principal en este fondo luminoso, escoge el color con óptima relación de contraste:",
-    "El cliente pide que este bloque claro resalte un botón importante. Elige el color del texto:"
+    "Sobre este fondo claro, ¿cuál color de texto se lee mejor?",
+    "Elige el color de texto con mejor contraste para este fondo claro:",
+    "¿Qué color hace que el texto sea más fácil de leer sobre este fondo luminoso?",
   ];
 
   static final List<String> _plantillasContrasteOscuro = [
-    "Un sitio web con modo nocturno utiliza este fondo oscuro. ¿Cuál color de texto ofrece la mejor lectura?",
-    "Para un cartel publicitario digital sobre este fondo negro, selecciona la tipografía con mayor legibilidad:",
-    "Accesibilidad en interfaces: Elige el color de texto que cumpla con el contraste mínimo sobre este fondo:",
-    "Diseñas una alerta crítica en una pantalla oscura. Elige el pigmento idóneo para que resalte:"
+    "En este fondo oscuro, ¿cuál color de texto se lee con mayor claridad?",
+    "Elige el color de texto que mejor resalta sobre este fondo oscuro:",
+    "¿Qué color usarías para que el texto resalte sobre la pantalla oscura?",
   ];
 
   static final List<List<String>> _parejasTextoPreview = [
@@ -718,4 +715,4 @@ class LevelGenerator {
     }
     return "El estudio científico del color une la física de la luz, la química de los pigmentos y la biología de nuestros ojos.";
   }
-}
+} 
