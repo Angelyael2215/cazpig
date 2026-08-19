@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../controllers/game_settings_controller.dart';
 import '../../controllers/user_controller.dart';
+import '../../services/notification_service.dart';
 import '../../theme/app_theme.dart';
 import '../widgets/animated_background.dart';
 
@@ -25,7 +26,7 @@ class _AjustesScreenState extends State<AjustesScreen> {
             Positioned.fill(
               child: Image.asset(
                 'assets/imagenes/fondo.jpeg',
-                fit:BoxFit.cover,
+                fit: BoxFit.cover,
               ),
             ),
             Scaffold(
@@ -63,7 +64,10 @@ class _AjustesScreenState extends State<AjustesScreen> {
                           subtitle: 'Recordatorios para cazar nuevos pigmentos',
                           icon: Icons.notifications_active_rounded,
                           value: settings.notificationsActive,
-                          onChanged: (value) => _controller.setNotificationsActive(value),
+                          onChanged: (value) async {
+                            _controller.setNotificationsActive(value);
+                            await NotificationService.toggleNotifications(value);
+                          },
                         ),
                         _buildDivider(),
                         _buildInfoTile(
@@ -231,4 +235,3 @@ class _AjustesScreenState extends State<AjustesScreen> {
     );
   }
 }
-

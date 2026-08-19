@@ -715,4 +715,4 @@ class LevelGenerator {
     }
     return "El estudio científico del color une la física de la luz, la química de los pigmentos y la biología de nuestros ojos.";
   }
-}
+} 
