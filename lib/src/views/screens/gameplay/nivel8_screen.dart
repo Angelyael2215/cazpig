@@ -148,6 +148,35 @@ class _Nivel8ScreenState extends State<Nivel8Screen> {
                 fontSize: 16,
                 fontWeight: FontWeight.w900,
               ),
+              child: controller.available.isEmpty
+                  ? const Center(
+                      child: Text(
+                        "¡Todos los pigmentos han sido clasificados!",
+                        style: TextStyle(color: Colors.greenAccent, fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: controller.available.map((color) {
+                          final String hex = "#${color.value.toRadixString(16).substring(2).toUpperCase()}";
+                          
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child:  Draggable<Color>(
+                              data: color,
+                              feedback: _buildDraggableCard(color, hex, true),
+                              childWhenDragging: Opacity(
+                                opacity: 0.3,
+                                child: _buildDraggableCard(color, hex, false),
+                              ),
+                              child: _buildDraggableCard(color, hex, false),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
             ),
           ),
           const Icon(
