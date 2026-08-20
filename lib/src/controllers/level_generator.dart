@@ -110,7 +110,7 @@ class LevelGenerator {
     "Elige el color de texto con mejor contraste para este fondo claro:",
     "¿Qué color hace que el texto sea más fácil de leer sobre este fondo luminoso?",
   ];
-
+                                                                                                                                                                            
   static final List<String> _plantillasContrasteOscuro = [
     "En este fondo oscuro, ¿cuál color de texto se lee con mayor claridad?",
     "Elige el color de texto que mejor resalta sobre este fondo oscuro:",
@@ -715,4 +715,4 @@ class LevelGenerator {
     }
     return "El estudio científico del color une la física de la luz, la química de los pigmentos y la biología de nuestros ojos.";
   }
-} 
+}
