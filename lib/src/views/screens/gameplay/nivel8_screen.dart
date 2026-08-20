@@ -321,7 +321,7 @@ class _Nivel8ScreenState extends State<Nivel8Screen> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/imagenes/cofres.png',
+              'assets/imagenes/sacos.png',
               fit: BoxFit.fill,
             ),
           ),
