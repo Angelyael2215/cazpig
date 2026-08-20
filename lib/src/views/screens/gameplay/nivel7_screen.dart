@@ -66,7 +66,6 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
             Navigator.of(context).pop();
           } else {
             controller.reiniciarSeleccion();
-            setState(() {});
           }
         },
         onVolver: () {
@@ -187,11 +186,11 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
           Text(
             datos.instruction,
             style: const TextStyle(
-  color: Color(0xFF2C1A04),
-  fontSize: 14,
-  height: 1.35,
-  fontWeight: FontWeight.w900,
-),
+              color: Color(0xFF2C1A04),
+              fontSize: 14,
+              height: 1.35,
+              fontWeight: FontWeight.w900,
+            ),
           ),
         ],
       ),
@@ -199,72 +198,76 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
   }
 
   Widget _buildColorPortal({
-    required Color color,
-    required String title,
-    required String hex,
-  }) {
-    return Expanded(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 150,
-            child: Stack(
-              alignment: Alignment.center,
-              clipBehavior: Clip.none,
-              children: [
-                // Círculo más pequeño para que no salga de la rueda.
-                Container(
-                  width: 98,
-                  height: 98,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: color,
-                    boxShadow: [
-                      BoxShadow(
-                        color: color.withOpacity(0.7),
-                        blurRadius: 18,
-                        spreadRadius: 3,
-                      ),
-                    ],
-                  ),
+  required Color color,
+  required String title,
+  required String hex,
+}) {
+  return Expanded(
+    child: Column(
+      children: [
+        SizedBox(
+          height: 160,
+          width: 160,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // 1. Círculo de color ajustado al orificio interno
+              Container(
+                width: 68, // Reducido para que quede detrás del borde del marco
+                height: 68,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: color,
+                  boxShadow: [
+                    BoxShadow(
+                      color: color.withOpacity(0.5),
+                      blurRadius: 8, // Difuminado más suave
+                      spreadRadius: -2, // Reduce la sombra para que no sobrepase el marco
+                    ),
+                  ],
                 ),
-
-                // Rueda ampliada: funciona como marco del color.
-                Transform.scale(
-                  scale: 1.9,
-                  child: Image.asset(
-                    'assets/imagenes/rueda.png',
-                    width: 150,
-                    height: 150,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ],
-            ),
+              ),
+              // 2. Marco metálico grande superpuesto
+              // 2. Marco metálico grande superpuesto (MODIFICADO)
+Positioned(
+  top: -12, // <-- MODIFICA ESTA LÍNEA PARA SUBIR O BAJAR
+  // center horizontally within the 160x160 box
+  left: 0,
+  right: 0,
+  child: Image.asset(
+    'assets/imagenes/rueda.png',
+    width: 160, // Mantenemos el tamaño
+    height: 200,
+    fit: BoxFit.contain,
+  ),
+),
+            ],
           ),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: colorDorado,
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
-            ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: colorDorado,
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
           ),
-          const SizedBox(height: 3),
-          Text(
-            hex,
-            style: const TextStyle(
-              color: colorDorado,
-              fontSize: 11,
-              fontFamily: 'monospace',
-              fontWeight: FontWeight.w900,
-            ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          hex,
+          style: const TextStyle(
+            color: colorDorado,
+            fontSize: 11,
+            fontFamily: 'monospace',
+            fontWeight: FontWeight.w900,
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildComparison(RgbLevelModel datos) {
     return Row(
@@ -291,89 +294,83 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
       ],
     );
   }
-
   Widget _buildSimilarity() {
-  final double similarity = controller.similarity;
+    final double similarity = controller.similarity;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double panelWidth = constraints.maxWidth;
+        final double imageWidth = panelWidth * 1.85;
+        final double imageHeight = imageWidth * 256 / 960;
 
-  return LayoutBuilder(
-    builder: (context, constraints) {
-      final double panelWidth = constraints.maxWidth;
-      final double imageWidth = panelWidth * 1.85;
-      final double imageHeight = imageWidth * 256 / 960;
-
-      return SizedBox(
-        width: double.infinity,
-        height: 170,
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              top: -4,
-              left: (panelWidth - imageWidth) / 2,
-              width: imageWidth,
-              height: imageHeight,
-              child: Image.asset(
-                'assets/imagenes/brujula.png',
-                fit: BoxFit.fill,
+        return SizedBox(
+          width: double.infinity,
+          height: 170,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                top: 7,
+                left: (panelWidth - imageWidth) / 2,
+                width: imageWidth,
+                height: imageHeight,
+                child: Image.asset(
+                  'assets/imagenes/brujula.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-
-            Positioned(
-              left: 42,
-              right: 42,
-              top: 78,
-              bottom: 18,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      'SIMILITUD: ${similarity.toStringAsFixed(0)}%',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Color(0xFFFFD580),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
+              Positioned(
+                left: 42,
+                right: 42,
+                top: 78,
+                bottom: 18,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'SIMILITUD: ${similarity.toStringAsFixed(0)}%',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: colorDorado,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      controller.feedbackMessage,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Color(0xFFFFE4A3),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w900,
+                    const SizedBox(height: 5),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        controller.feedbackMessage,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: colorTexto,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-
+            ],
+          ),
+        );
+      },
+    );
+  }
   Widget _buildCannon({
-  required String label,
-  required double value,
-  required Color color,
-  required ValueChanged<double> onChanged,
-}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Transform.translate(
-        offset: const Offset(0, 6),
-        child: Padding(
+    required String label,
+    required double value,
+    required Color color,
+    required ValueChanged<double> onChanged,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             children: [
@@ -381,7 +378,7 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
                 child: Text(
                   '$label [${value.toInt()}]',
                   style: const TextStyle(
-                    color: Color(0xFFFFD580),
+                    color: colorDorado,
                     fontSize: 14,
                     fontWeight: FontWeight.w900,
                   ),
@@ -390,7 +387,7 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
               Text(
                 '[${value.toInt()}]',
                 style: const TextStyle(
-                  color: Color(0xFFFFD580),
+                  color: colorDorado,
                   fontSize: 14,
                   fontWeight: FontWeight.w900,
                   fontFamily: 'monospace',
@@ -399,8 +396,7 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
             ],
           ),
         ),
-      ),
-      const SizedBox(height: 2),
+        const SizedBox(height: 2),
         SizedBox(
           height: 106,
           child: LayoutBuilder(
@@ -410,16 +406,12 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
               return Stack(
                 alignment: Alignment.centerLeft,
                 children: [
-                  // Cañón más grande y visible.
                   Positioned.fill(
                     child: Image.asset(
                       'assets/imagenes/cañon.png',
                       fit: BoxFit.fill,
                     ),
                   ),
-
-                  // El slider empieza ligeramente antes de la boca,
-                  // eliminando el espacio muerto entre la boca y la línea.
                   Positioned(
                     left: width * 0.385,
                     right: width * 0.03,
@@ -452,62 +444,57 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
       ],
     );
   }
-
   Widget _buildCheckButton() {
-    return Transform.translate(
-      offset: const Offset(0, 24),
-      child: SizedBox(
-        width: double.infinity,
-        height: 150,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                'assets/imagenes/cofre.png',
-                fit: BoxFit.fill,
-              ),
+    return SizedBox(
+      width: double.infinity,
+      height: 150,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/imagenes/cofre.png',
+              fit: BoxFit.fill,
             ),
-            Positioned(
-              left: 48,
-              right: 48,
-              top: 58,
-              bottom: 32,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: _comprobar,
-                  borderRadius: BorderRadius.circular(25),
-                  child: const Center(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        'COMPROBAR',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFFFFF0A8),
-                          fontSize: 23,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 1.2,
-                          shadows: [
-                            Shadow(
-                              color: Colors.black87,
-                              blurRadius: 4,
-                            ),
-                          ],
-                        ),
+          ),
+          Positioned(
+            left: 48,
+            right: 48,
+            top: 58,
+            bottom: 32,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: _comprobar,
+                borderRadius: BorderRadius.circular(25),
+                child: const Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'COMPROBAR',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFFFFF0A8),
+                        fontSize: 23,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.2,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black87,
+                            blurRadius: 4,
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -565,7 +552,7 @@ class _Nivel7ScreenState extends State<Nivel7Screen> {
                               color: Colors.blueAccent,
                               onChanged: controller.updateBlue,
                             ),
-                            const SizedBox(height: 0),
+                            const SizedBox(height: 8),
                             _buildCheckButton(),
                           ],
                         ),

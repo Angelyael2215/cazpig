@@ -28,44 +28,35 @@ class _Nivel6ScreenState extends State<Nivel6Screen> {
     super.dispose();
   }
 
-  Color _getShadowColor(Color color) {
-    return Color.fromARGB(
-      (color.a * 255).round().clamp(0, 255),
-      (color.r * 255 * 0.7).round().clamp(0, 255),
-      (color.g * 255 * 0.7).round().clamp(0, 255),
-      (color.b * 255 * 0.7).round().clamp(0, 255),
-    );
-  }
-
   String _getNombreColor(Color color) {
     final int value = color.value & 0xFFFFFF;
 
-    if (value == 0xE53935) return 'ROJO\nCADMIO';
-    if (value == 0x43A047) return 'VERDE\nVIRIDIÁN';
-    if (value == 0x795548) return 'MARRÓN\nTIERRA';
-    if (value == 0xFFFFB300) return 'AMARILLO\nCROMO';
-    if (value == 0xFFC62828) return 'ROJO\nOSCURO';
+    if (value == 0xE53935) return 'ROJO CADMIO';
+    if (value == 0x43A047) return 'VERDE VIRIDIÁN';
+    if (value == 0x795548) return 'MARRÓN TIERRA';
+    if (value == 0xFFFFB300) return 'AMARILLO CROMO';
+    if (value == 0xFFC62828) return 'ROJO OSCURO';
     if (value == 0xFF0288D1) return 'CELESTE';
-    if (value == 0xFFD84315) return 'NARANJA\nOSCURO';
+    if (value == 0xFFD84315) return 'NARANJA OSCURO';
     if (value == 0xFF757575) return 'GRIS';
     if (value == 0xFFC2185B) return 'MAGENTA';
     if (value == 0xFFFFFFFF) return 'BLANCO';
     if (value == 0xFF6A1B9A) return 'PÚRPURA';
-    if (value == 0xFF558B2F) return 'VERDE\nOLIVA';
+    if (value == 0xFF558B2F) return 'VERDE OLIVA';
     if (value == 0xFF9E9D24) return 'LIMÓN';
-    if (value == 0xFF1976D2) return 'AZUL\nREY';
+    if (value == 0xFF1976D2) return 'AZUL REY';
     if (value == 0xFFEF6C00) return 'NARANJA';
-    if (value == 0xFF9E9E9E) return 'GRIS\nCLARO';
+    if (value == 0xFF9E9E9E) return 'GRIS CLARO';
     if (value == 0xFF4E342E) return 'CAFÉ';
-    if (value == 0xFFFF4081) return 'ROSADO\nNEÓN';
-    if (value == 0xFFFFD54F) return 'AMARILLO\nCLARO';
-    if (value == 0xFF4A148C) return 'PÚRPURA\nOSCURO';
-    if (value == 0xFFFFB74D) return 'NARANJA\nCLARO';
-    if (value == 0xFFF8BBD0) return 'ROSADO\nCLARO';
+    if (value == 0xFFFF4081) return 'ROSADO NEÓN';
+    if (value == 0xFFFFD54F) return 'AMARILLO CLARO';
+    if (value == 0xFF4A148C) return 'PÚRPURA OSCURO';
+    if (value == 0xFFFFB74D) return 'NARANJA CLARO';
+    if (value == 0xFFF8BBD0) return 'ROSADO CLARO';
     if (value == 0xFF00ACC1) return 'TURQUESA';
-    if (value == 0xFFF4511E) return 'ROJO\nNARANJA';
-    if (value == 0xFF4FC3F7) return 'CELESTE\nCLARO';
-    if (value == 0xFF4CAF50) return 'VERDE\nCLARO';
+    if (value == 0xFFF4511E) return 'ROJO NARANJA';
+    if (value == 0xFF4FC3F7) return 'CELESTE CLARO';
+    if (value == 0xFF4CAF50) return 'VERDE CLARO';
 
     return 'COLOR';
   }
@@ -93,8 +84,6 @@ class _Nivel6ScreenState extends State<Nivel6Screen> {
 
       final int vidasRestantes = UserController().currentUser.lives;
 
-      setState(() {});
-
       GameBottomSheet.mostrarDerrota(
         context: context,
         mensaje: vidasRestantes <= 0
@@ -105,7 +94,6 @@ class _Nivel6ScreenState extends State<Nivel6Screen> {
             Navigator.of(context).pop();
           } else {
             controller.reiniciarSeleccion();
-            setState(() {});
           }
         },
         onVolver: () {
@@ -135,29 +123,19 @@ class _Nivel6ScreenState extends State<Nivel6Screen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: activo
-                ? const [
-                    Color(0xFFFBE49D),
-                    Color(0xFFC89218),
-                  ]
-                : const [
-                    Color(0xFFC3A26B),
-                    Color(0xFF7A5A28),
-                  ],
+                ? const [Color(0xFFFBE49D), Color(0xFFC89218)]
+                : const [Color(0xFFC3A26B), Color(0xFF7A5A28)],
           ),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: activo
-                ? const Color(0xFFFFF7C2)
-                : const Color(0xFF4A3410),
+            color: activo ? const Color(0xFFFFF7C2) : const Color(0xFF4A3410),
             width: activo ? 2 : 1,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: activo
-                ? const Color(0xFF2C1A04)
-                : const Color(0xFF1E1102),
+            color: activo ? const Color(0xFF2C1A04) : const Color(0xFF1E1102),
             fontSize: 9.5,
             fontWeight: FontWeight.w900,
           ),
@@ -224,9 +202,7 @@ class _Nivel6ScreenState extends State<Nivel6Screen> {
 
     return GestureDetector(
       onTap: () {
-        setState(() {
-          controller.seleccionarColor(color);
-        });
+        controller.seleccionarColor(color);
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
@@ -276,7 +252,7 @@ class _Nivel6ScreenState extends State<Nivel6Screen> {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        _getNombreColor(color).replaceAll('\n', ' '),
+                        _getNombreColor(color),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
@@ -339,332 +315,315 @@ class _Nivel6ScreenState extends State<Nivel6Screen> {
     final datosNivel = controller.datosNivel;
     final user = UserController().currentUser;
 
-    final Widget mainContent = Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/imagenes/fondoagua.jpeg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          SafeArea(
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF3B2312),
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Color(0xFF8B5A2B),
-                        width: 3,
-                      ),
-                    ),
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, child) {
+        Widget optionsContent = AspectRatio(
+          aspectRatio: 2.1,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/imagenes/cuadros.png',
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Positioned.fill(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                    top: 40,
+                    bottom: 32,
                   ),
                   child: Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: Color(0xFFE2B755),
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: datosNivel.options.take(4).map((color) {
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 11), //controla que tan flacos o gorsdos son los colores
+                          child: _buildColorOption(color),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      Expanded(
-                        child: Text(
-                          'DALTONISMO - Nivel: ${widget.nivelInicial}',
-                          style: const TextStyle(
-                            color: Color(0xFFE2B755),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                        size: 18,
-                      ),
-                      const SizedBox(width: 3),
-                      Text(
-                        '${user.lives}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Icon(
-                        Icons.diamond,
-                        color: Colors.tealAccent,
-                        size: 18,
-                      ),
-                      const SizedBox(width: 3),
-                      Text(
-                        '${user.pigments}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                   ),
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 8,
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 18,
+              ),
+            ],
+          ),
+        );
+
+        // Aislamos el ColorFiltered únicamente en las opciones si hay una simulación activa
+        if (activeSimulacion != 'Ninguno') {
+          optionsContent = ColorFiltered(
+            colorFilter: ColorFilter.matrix(_getColorMatrix()),
+            child: optionsContent,
+          );
+        }
+
+        return Scaffold(
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/imagenes/fondoagua.jpeg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SafeArea(
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF3B2312),
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Color(0xFF8B5A2B),
+                            width: 3,
                           ),
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/imagenes/ficha.png',
-                              ),
-                              fit: BoxFit.fill,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              color: Color(0xFFE2B755),
                             ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'DALTONISMO',
-                                style: TextStyle(
-                                  color: Color(0xFF3B2312),
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                datosNivel.instruction,
-                                style: const TextStyle(
-                                  color: Color(0xFF2C1A04),
-                                  fontSize: 11,
-                                  height: 1.3,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'FILTRO DE SIMULACIÓN DE ACCESIBILIDAD:',
-                          style: TextStyle(
-                            color: Color(0xFFE2B755),
-                            fontSize: 9.5,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              _buildFilterButton('REAL', 'Ninguno'),
-                              const SizedBox(width: 6),
-                              _buildFilterButton(
-                                'PROTANOPIA',
-                                'Protanopia',
-                              ),
-                              const SizedBox(width: 6),
-                              _buildFilterButton(
-                                'DEUTERANOPIA',
-                                'Deuteranopia',
-                              ),
-                              const SizedBox(width: 6),
-                              _buildFilterButton(
-                                'TRITANOPIA',
-                                'Tritanopia',
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        const Text(
-                          "Alterna entre filtros para simular diferentes tipos de daltonismo o pulsa 'REAL' para contrastar.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 8,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _buildPorthole(
-                              label: 'COLOR OBJETIVO',
-                              child: Container(
-                                color: datosNivel.targetColor,
-                                child: const Icon(
-                                  Icons.palette,
-                                  color: Colors.black38,
-                                  size: 28,
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: Icon(
-                                Icons.swap_horiz_rounded,
+                          Expanded(
+                            child: Text(
+                              'DALTONISMO - Nivel: ${widget.nivelInicial}',
+                              style: const TextStyle(
                                 color: Color(0xFFE2B755),
-                                size: 30,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w900,
                               ),
                             ),
-                            _buildPorthole(
-                              label: controller.colorSeleccionado == null
-                                  ? 'SIN SELECCIÓN'
-                                  : 'TU SELECCIÓN',
-                              child: controller.colorSeleccionado == null
-                                  ? Container(
-                                      color: Colors.black45,
-                                      child: const Icon(
-                                        Icons.help_outline,
-                                        color: Colors.white24,
-                                        size: 28,
-                                      ),
-                                    )
-                                  : Container(
-                                      color: controller.colorSeleccionado,
-                                      child: const Icon(
-                                        Icons.check,
-                                        color: Colors.black38,
-                                        size: 28,
-                                      ),
-                                    ),
+                          ),
+                          const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 3),
+                          Text(
+                            '${user.lives}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
                             ),
-                          ],
+                          ),
+                          const SizedBox(width: 10),
+                          const Icon(
+                            Icons.diamond,
+                            color: Colors.tealAccent,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 3),
+                          Text(
+                            '${user.pigments}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
                         ),
-                        const SizedBox(height: 14),
-                        AspectRatio(
-                          aspectRatio: 2.1,
-                          child: Stack(
-                            children: [
-                              Positioned.fill(
-                                child: Image.asset(
-                                  'assets/imagenes/opcion.png',
+                        child: Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 24,
+                                vertical: 18,
+                              ),
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('assets/imagenes/ficha.png'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                              Positioned.fill(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 28,
-                                    right: 28,
-                                    top: 48,
-                                    bottom: 26,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'DALTONISMO',
+                                    style: TextStyle(
+                                      color: Color(0xFF3B2312),
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w900,
+                                    ),
                                   ),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: datosNivel.options
-                                        .take(4)
-                                        .map((color) {
-                                      return Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 4),
-                                          child: _buildColorOption(color),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    datosNivel.instruction,
+                                    style: const TextStyle(
+                                      color: Color(0xFF2C1A04),
+                                      fontSize: 11,
+                                      height: 1.3,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'FILTRO DE SIMULACIÓN DE ACCESIBILIDAD:',
+                              style: TextStyle(
+                                color: Color(0xFFE2B755),
+                                fontSize: 9.5,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  _buildFilterButton('REAL', 'Ninguno'),
+                                  const SizedBox(width: 6),
+                                  _buildFilterButton('PROTANOPIA', 'Protanopia'),
+                                  const SizedBox(width: 6),
+                                  _buildFilterButton('DEUTERANOPIA', 'Deuteranopia'),
+                                  const SizedBox(width: 6),
+                                  _buildFilterButton('TRITANOPIA', 'Tritanopia'),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              "Alterna entre filtros para simular diferentes tipos de daltonismo o pulsa 'REAL' para contrastar.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 8,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildPorthole(
+                                  label: 'COLOR OBJETIVO',
+                                  child: Container(
+                                    color: datosNivel.targetColor,
+                                    child: const Icon(
+                                      Icons.palette,
+                                      color: Colors.black38,
+                                      size: 28,
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Icon(
+                                    Icons.swap_horiz_rounded,
+                                    color: Color(0xFFE2B755),
+                                    size: 30,
+                                  ),
+                                ),
+                                _buildPorthole(
+                                  label: controller.colorSeleccionado == null
+                                      ? 'SIN SELECCIÓN'
+                                      : 'TU SELECCIÓN',
+                                  child: controller.colorSeleccionado == null
+                                      ? Container(
+                                          color: Colors.black45,
+                                          child: const Icon(
+                                            Icons.help_outline,
+                                            color: Colors.white24,
+                                            size: 28,
+                                          ),
+                                        )
+                                      : Container(
+                                          color: controller.colorSeleccionado,
+                                          child: const Icon(
+                                            Icons.check,
+                                            color: Colors.black38,
+                                            size: 28,
+                                          ),
                                         ),
-                                      );
-                                    }).toList(),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            optionsContent,
+                            const SizedBox(height: 16),
+                            GestureDetector(
+                              onTap: controller.colorSeleccionado != null
+                                  ? _evaluarRespuesta
+                                  : null,
+                              child: AnimatedOpacity(
+                                duration: const Duration(milliseconds: 200),
+                                opacity: controller.colorSeleccionado != null ? 1 : 0.6,
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: controller.colorSeleccionado != null
+                                          ? const [Color(0xFFFBE49D), Color(0xFFC89218)]
+                                          : const [Color(0xFF8A7550), Color(0xFF4A3E2A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(14),
+                                    border: Border.all(
+                                      color: controller.colorSeleccionado != null
+                                          ? const Color(0xFFFFF0B3)
+                                          : const Color(0xFF5A4A30),
+                                      width: 2,
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        GestureDetector(
-                          onTap: controller.colorSeleccionado != null
-                              ? _evaluarRespuesta
-                              : null,
-                          child: AnimatedOpacity(
-                            duration: const Duration(milliseconds: 200),
-                            opacity: controller.colorSeleccionado != null
-                                ? 1
-                                : 0.6,
-                            child: Container(
-                              width: double.infinity,
-                              height: 52,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: controller.colorSeleccionado != null
-                                      ? const [
-                                          Color(0xFFFBE49D),
-                                          Color(0xFFC89218),
-                                        ]
-                                      : const [
-                                          Color(0xFF8A7550),
-                                          Color(0xFF4A3E2A),
-                                        ],
-                                ),
-                                borderRadius: BorderRadius.circular(14),
-                                border: Border.all(
-                                  color: controller.colorSeleccionado != null
-                                      ? const Color(0xFFFFF0B3)
-                                      : const Color(0xFF5A4A30),
-                                  width: 2,
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'COMPROBAR',
-                                  style: TextStyle(
-                                    color: controller.colorSeleccionado != null
-                                        ? const Color(0xFF2C1A04)
-                                        : Colors.white38,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: 1.5,
+                                  child: Center(
+                                    child: Text(
+                                      'COMPROBAR',
+                                      style: TextStyle(
+                                        color: controller.colorSeleccionado != null
+                                            ? const Color(0xFF2C1A04)
+                                            : Colors.white38,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w900,
+                                        letterSpacing: 1.5,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
+                            const SizedBox(height: 12),
+                          ],
                         ),
-                        const SizedBox(height: 12),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-
-    if (activeSimulacion == 'Ninguno') {
-      return mainContent;
-    }
-
-    return ColorFiltered(
-      colorFilter: ColorFilter.matrix(_getColorMatrix()),
-      child: mainContent,
+        );
+      },
     );
   }
 }

@@ -58,7 +58,7 @@ flutter:
     - assets/imagenes/tarjeta.png
     - assets/imagenes/opciones.png
     - assets/imagenes/fondoagua.jpeg
-    - assets/imagenes/ficha.png
+  
     - assets/imagenes/opcion.png
     - assets/imagenes/cañon.png
     - assets/imagenes/cofre.png
@@ -69,9 +69,19 @@ flutter:
     - assets/imagenes/cajasol.png
     - assets/imagenes/cajafria.png
     - assets/imagenes/tabla.png
-    - assets/imagenes/cofres.png
+  
     - assets/imagenes/mastil.png
     - assets/imagenes/lingote_amarillo.png
     - assets/imagenes/lingote_naranja.png
     - assets/imagenes/polvo_azul.png
     - assets/imagenes/polvo_turquesa.png
+    - assets/imagenes/cofrecafe.png
+    - assets/imagenes/cofreazul.png
+    - assets/imagenes/cofrerojo.png
+    - assets/imagenes/cofregris.png
+    - assets/imagenes/barramensaje.png
+    - assets/imagenes/barrabaja.png
+    - assets/imagenes/placa.png
+    - assets/imagenes/sacos.png
+    - assets/imagenes/ficha.png
+    - assets/imagenes/cuadros.png
