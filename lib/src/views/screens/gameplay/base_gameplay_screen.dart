@@ -93,11 +93,30 @@ class _BaseGameplayScreenState<T extends LevelModel, C extends BaseLevelControll
         final datos = _controller.datosNivel;
 
         return Scaffold(
-          backgroundColor: const Color(0xFF1E2638), 
-          appBar: AppBar(
-            title: Text('${datos.title} - Nivel ${datos.level}'),
-            backgroundColor: const Color(0xFF141824),
+          backgroundColor: Colors.transparent,
+         appBar: AppBar(
+            backgroundColor: Colors.transparent,
             elevation: 0,
+            iconTheme: const IconThemeData(
+              color: Color(0xFFFFD580),
+              size: 28,
+            ),
+            title: Text(
+              '${datos.title} - Nivel ${datos.level}',
+              style: const TextStyle(
+                color: Color(0xFFFFE4A3),
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.8,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+            ),
             actions: [
               ListenableBuilder(
                 listenable: UserController(),
@@ -111,9 +130,12 @@ class _BaseGameplayScreenState<T extends LevelModel, C extends BaseLevelControll
                       Text(
                         '${user.lives}',
                         style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFFE4A3),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                          shadows: [
+                            Shadow(color: Colors.black, blurRadius: 4),
+                          ],
                         ),
                       ),
                       const SizedBox(width: 14),
@@ -123,9 +145,12 @@ class _BaseGameplayScreenState<T extends LevelModel, C extends BaseLevelControll
                       Text(
                         '${user.pigments}',
                         style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFFE4A3),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                          shadows: [
+                            Shadow(color: Colors.black, blurRadius: 4),
+                          ],
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -139,7 +164,7 @@ class _BaseGameplayScreenState<T extends LevelModel, C extends BaseLevelControll
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Flex(
                     direction: esPantallaAncha ? Axis.horizontal : Axis.vertical,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -151,7 +176,7 @@ class _BaseGameplayScreenState<T extends LevelModel, C extends BaseLevelControll
                             ? widget.instructionCardBuilder!(context, _controller)
                             : _buildDefaultInstructionCard(datos),
                       ),
-                      const SizedBox(height: 24, width: 24),
+                      const SizedBox(height: 16, width: 16),
                       SizedBox(
                         width: esPantallaAncha ? ancho * 0.45 : double.infinity,
                         child: widget.gameFieldBuilder(context, _controller),
@@ -161,12 +186,11 @@ class _BaseGameplayScreenState<T extends LevelModel, C extends BaseLevelControll
                 ),
               ),
 
-              // SI SE ACTIVA LA BANDERA, QUITAMOS EL CONTENEDOR GRIS DE ABAJO COMPLETAMENTE
               if (!widget.ocultarBotonComprobar)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF141824),
+                    color: Color(0xDD141824),
                     borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                   ),
                   child: SafeArea(
@@ -249,7 +273,7 @@ class _BaseGameplayScreenState<T extends LevelModel, C extends BaseLevelControll
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF2C3545),
+        color: const Color.fromARGB(255, 53, 35, 4),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: const Color(0xFF3F4B62), width: 2),
       ),
